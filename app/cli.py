@@ -248,6 +248,81 @@ def analyse(pfad, aktion, prompt, speichern):
         click.echo("\nErgebnis gespeichert.")
 
 
+# ─── CEO-BRIEFING ────────────────────────────────────────────────────
+
+@cli.command()
+@click.option("--thema", "-t", prompt="Thema (worum geht es?)",
+              help="Thema des Briefings")
+@click.option("--position", "-p", prompt="Deine Position (was willst du erreichen?)",
+              help="Die Meinung die ueberzeugend vertreten werden soll")
+@click.option("--kontext", "-k", default="", help="Zusaetzlicher Kontext")
+@click.option("--ceo", "-c", default="", help="Name des CEOs")
+@click.option("--format", "format_typ",
+              type=click.Choice(["memo", "email", "pitch", "argumentation"]),
+              default="memo", help="Format: memo, email, pitch oder argumentation")
+@click.option("--fakten", "-f", default="", help="Zusaetzliche Fakten/Argumente")
+@click.option("--speichern", "-s", is_flag=True, help="Ergebnis als Datei speichern")
+def briefing(thema, position, kontext, ceo, format_typ, fakten, speichern):
+    """CEO-Briefing erstellen — ueberzeugend, logisch, stichhaltig.
+
+    Nutzt Minto Pyramid, SCQA, BLUF, Steel-Man, Verlustaversion und
+    alle gesammelten Quellen aus der Wissensdatenbank.
+
+    Beispiele:
+        python run.py briefing -t "SCE Mitgliedschaft" -p "Silber abschliessen"
+        python run.py briefing --format email --speichern
+        python run.py briefing --format pitch -c "Max Mustermann"
+    """
+    from app.ai.ceo_briefing import generate_briefing
+
+    click.echo(f"\nGeneriere {format_typ.upper()}-Briefing...")
+    click.echo(f"Thema: {thema}")
+    click.echo(f"Position: {position}\n")
+
+    try:
+        result = generate_briefing(
+            thema=thema,
+            position=position,
+            kontext=kontext,
+            ceo_name=ceo,
+            format_typ=format_typ,
+            zusatz_fakten=fakten,
+        )
+
+        click.echo(f"\n{'═' * 60}")
+        click.echo(result)
+        click.echo(f"{'═' * 60}")
+
+        if speichern:
+            # Als Datei speichern
+            from datetime import datetime
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            filename = f"briefing_{format_typ}_{timestamp}.md"
+            out_path = OUTPUT_DIR / filename
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            out_path.write_text(result, encoding="utf-8")
+            click.echo(f"\nGespeichert: {out_path}")
+
+            # Auch in DB speichern
+            from app.storage.database import get_db, add_analysis
+            conn = get_db()
+            add_analysis(
+                conn, source_id=None,
+                analysis_type=f"briefing_{format_typ}",
+                result=result,
+                prompt=f"Thema: {thema} | Position: {position}",
+                model=ANTHROPIC_MODEL if 'ANTHROPIC_MODEL' in dir() else None,
+            )
+            conn.close()
+
+    except ValueError as e:
+        click.echo(f"\nFEHLER: {e}", err=True)
+        sys.exit(1)
+    except Exception as e:
+        click.echo(f"\nFEHLER bei KI-Analyse: {e}", err=True)
+        sys.exit(1)
+
+
 # ─── STATUS ──────────────────────────────────────────────────────────
 
 @cli.command()
