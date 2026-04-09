@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- saved from url=(0310)https://cloud.ccm19.de/x-content-blocked.html?apiKey=16521bff70fa177ced242495cc79b95d11455571884ba8ce&domain=62f3afc8043e477cc2174b2d&gen=2&theme=62f3afc8043e477cc2174b34&lang=de_DE&v=1775407347&url=chrome-extension%3A%2F%2Fkdelkaogljjcbjffjmahedaobfjineig%2Fpermissions.html&origin=https%3A%2F%2Fmucdai.hm.edu -->
+<html lang="de" class="domain--"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>CCM19 content blocker</title>
+	<meta name="generator" content="CCM19: Cookie Consent Manager - https://www.ccm19.de/">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="robots" content="noindex">
+
+		<style type="text/css">*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;height:100%}body{display:flex;flex-flow:row nowrap;justify-content:center;align-items:center;min-height:100%;font-family:'Source Sans Pro','Roboto',sans-serif;font-weight:400;font-size:1rem;line-height:1.4;color:#fff;background:#161616}main{display:flex;flex-flow:column nowrap;padding:.9375rem;width:100%;max-width:80rem}#preview{position:absolute;left:0;right:0;top:0;bottom:0;margin:0;object-fit:contain;object-position:center center;z-index:-1;width:100%;height:100%;opacity:.4}.map #preview{object-fit:cover}h1{margin-bottom:.625rem;font-size:1.75rem;line-height:1}p{margin-bottom:.9375rem;font-weight:inherit;font-size:inherit;line-height:inherit}button{display:inline-block;margin:0;padding:0 20px;width:auto;height:41px;font-weight:inherit;font-style:inherit;font-size:inherit;line-height:1;color:#fff;background:#fb5454;border:3px solid #fb5454;box-shadow:none;transition:all 128ms ease-out 0s;cursor:pointer;-webkit-appearance:none;appearance:none}button:hover,button:focus{color:#fff;background-color:#fb5454;border-color:#fb5454;box-shadow:none}button:focus{outline:none}.button-container{display:flex;flex-flow:row wrap;justify-content:center;margin-right:-.25rem;margin-left:-.25rem}.button-container>button{margin-right:.25rem;margin-left:.25rem}.button-container>button:not(:last-child){margin-bottom:.5rem}</style>
+	 
+		<link rel="stylesheet" href="./x-content-blocked.css" type="text/css">
+	
+	<script type="text/javascript">/*<![CDATA[*/
+		(function () {
+			var contentElement = null;
+			var lastContentHeight = -1;
+
+			function sendMessage(action, data) {
+				var payload = typeof data == 'object' ? data : {};
+				payload.realm = 'CCM19';
+				payload.type = 'ContentBlocker';
+				payload.action = action;
+				payload.embedding = null;
+
+				window.parent.postMessage(payload, '*');
+			}
+
+			function updateContainerHeight() {
+				var currentHeight = contentElement.clientHeight;
+
+				// Aktualisiere Höhe, wenn Iframe sichtbar und Höhe verändert
+				if (currentHeight > 0 && currentHeight != lastContentHeight) {
+					sendMessage('updateHeight', {
+						innerHeight: currentHeight,
+						initialUpdate: lastContentHeight < 0,
+					});
+					lastContentHeight = currentHeight;
+				}
+
+				window.requestAnimationFrame(updateContainerHeight);
+			}
+
+			function replaceDeepText(node, needle, replacement) {
+				if (node.nodeType == Node.TEXT_NODE) {
+					node.textContent = node.textContent.replace(needle, replacement);
+				}
+				else if (node.nodeType == Node.ELEMENT_NODE) {
+					for (var i = 0; i < node.childNodes.length; i++) {
+						replaceDeepText(node.childNodes[i], needle, replacement);
+					}
+				}
+			}
+
+			/**
+			 * @param {MessageEvent} event
+			 */
+			function onPostMessage(event) {
+				// Nur dedizierte CCM19-Events behandeln
+				if (typeof event.data != 'object' || event.data.realm != 'CCM19' || event.data.type != 'ContentBlocker') {
+					return;
+				}
+
+				event.stopImmediatePropagation();
+
+				var action = typeof event.data.action == 'string' ? event.data.action : '';
+				switch (action) {
+					case 'resourceDomain':
+						var resourceDomain = typeof event.data.domain == 'string' ? event.data.domain : '';
+						Array.prototype.slice.call(document.getElementsByTagName('MAIN')[0].children).forEach(function (element) {
+							replaceDeepText(element, /:domain\b/g, resourceDomain);
+						});
+
+						// Domain der blockierten Ressource als Klasse für das HTML-Element
+						var domainClassName = resourceDomain
+							.toLowerCase()
+							.replace(/[^a-z0-9]/g, '-')
+							.replace(/^-+|-+$/g, '')
+						;
+						document.documentElement.classList.add('domain--' + domainClassName);
+						break;
+					default:
+						break;
+				}
+			}
+
+			function onActionButtonClicked() {
+				sendMessage(this.value);
+			}
+
+			window.addEventListener('DOMContentLoaded', function () {
+				contentElement = document.querySelector('main');
+				Array.prototype.slice.call(document.querySelectorAll('button[name="action"]')).forEach(function (button) {
+					button.addEventListener('click', onActionButtonClicked);
+				});
+				updateContainerHeight();
+			});
+
+			window.addEventListener('message', onPostMessage);
+			sendMessage('resourceDomain');
+		})();
+	/*]]>*/</script>
+</head>
+<body>
+<main>
+		<h1>Externe Inhalte blockiert</h1>
+	<p>An dieser Stelle wurde das Laden einer Ressource von  unterbunden. Ob und welche Cookies möglicherweise durch den Aufruf gesetzt würden, können wir Ihnen nicht sagen. Wenn Sie Inhalte von  dennoch nachladen möchten, akzeptieren Sie diesen Umstand bitte mit folgender Schaltfläche.</p>
+	<div class="button-container">
+					<button id="consent" type="button" name="action" value="thirdPartyContentConsentGranted">Externe Inhalte nachladen</button>
+			</div>
+</main>
+
+
+</body></html>

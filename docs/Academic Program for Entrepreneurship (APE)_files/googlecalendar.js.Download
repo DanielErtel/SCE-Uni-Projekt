@@ -1,0 +1,15 @@
+if(jQuery('.googlecalendarIframe').length){
+    jQuery('.googlecalendarIframe').each(function(){
+            jQuery(this).attr('src',jQuery(this).attr('data-src'));
+            jQuery(this).parent().addClass('googlecalendarready');
+
+
+    });
+}
+
+if(jQuery('.googlecalendarplaceholder').length){
+    jQuery('.googlecalendarplaceholder').each(function(){
+            jQuery(this).remove();
+    });
+}
+

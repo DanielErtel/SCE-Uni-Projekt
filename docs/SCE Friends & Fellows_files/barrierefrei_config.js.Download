@@ -1,0 +1,415 @@
+window.barrierefreiConfig = {
+    langConfig: [
+        {
+            "element": "#logo",
+            "lang": {
+                "de-DE": {
+                    "title": "Beispiel"
+                },
+                "en-EN": {
+                    "title": "Example"
+                }
+            }
+        },
+    ],
+    infoText: [
+        {
+            "element": "Text",
+            "lang": {
+                "de-DE": {
+                    "text": "<strong>Info</strong>"+
+                            "<p>Tastatur-Kurzbefehle</p>"
+                },
+                "en-EN": {
+                    "text": "<strong>Info</strong>"+
+                            "<p>Keyboard-Shortcuts</p>"
+                }
+            }
+        },
+    ],
+    otherConfig: {
+        shortcutKeys: [
+            {
+                selector: "nav[role='navigation']",
+                accessKey: "n",
+                 "lang": {
+                    "de-DE": {
+                        "text": "Navigation"
+                    },
+                    "en-EN": {
+                        "text": "Navigation"
+                    }
+                }
+            },
+            {
+                selector: "form",
+                accessKey: "f",
+                 "lang": {
+                    "de-DE": {
+                        "text": "Formular"
+                    },
+                    "en-EN": {
+                        "text": "Formular"
+                    }
+                }
+            },
+            {
+                selector: "main",
+                accessKey: "m",
+                 "lang": {
+                    "de-DE": {
+                        "text": "Main"
+                    },
+                    "en-EN": {
+                        "text": "Main"
+                    }
+                }
+            },
+            {
+                selector: "body>footer",
+                accessKey: "b",
+                 "lang": {
+                    "de-DE": {
+                        "text": "Footer"
+                    },
+                    "en-EN": {
+                        "text": "Footer"
+                    }
+                }
+            },
+            {
+                selector: "https://www.sce.de/",
+                accessKey: "1",
+                 "lang": {
+                    "de-DE": {
+                        "text": "Startseite"
+                    },
+                    "en-EN": {
+                        "text": "Homepage"
+                    }
+                }
+            }
+        ],
+        ariaHidden: [
+            { selector: '[class*="hidden"]' },
+            { selector: '[type="hidden"]' },
+        ],
+        ariaRole: [
+            {
+                entries: [
+                    { key: 'role_button|tabindex_0', selector: '.roleButton,.tabindex,div.btn-cookie' },
+                    { key: 'role_link', selector: '.roleLink' },
+                    { key: 'tabindex_-1', selector: '.nano-content,.f3-widget-paginator>li>a,*[title="TÜV ISO 9001"]' }
+                ],
+                exclusions: ['#logo', 'footer']
+            }
+        ],
+        navKeyboard: [
+            {
+                selector: ['nav', '.nav', '']
+            }
+        ],
+        keyboardOpenElement: [
+            { selector: '.itmaccordion_accordionfk dt', action: '.itmaccordion_accordionfk dd', display: '' },
+            { selector: '.searchIcon', action: '.searchField input', display: 'block' },
+        ],
+        domChanges: [
+            {
+                selector: ['#klaro .klaro div', '.ajax']
+            }
+        ],
+        formLabel: [
+            {
+                exclusions: ['#exclude-id', '.exclude-class']
+            }
+        ],
+        vibrate: [
+            {
+                entries: ['.vibrate', '#bfToggle', '#bfPannel button', '#bfPannel a'],
+                exclusions: ['.no-vibrate']
+            }
+        ],
+        highlightLinks: [
+            {
+                selector: ['a:not([title="TÜV ISO 9001"])', 'input[type="submit"]', 'button', '#menuToggle','.klaro-play','*:not(footer) .scrollnav ul[id*="bfNavSub"]>div','.searchIcon','.f3-widget-paginator>li','.filtercategorie','.casub','.allFilter','.f-close']
+            }
+        ],
+        focusEvents: [
+            {
+                selector: ['input', 'button', 'select', 'textarea', 'a', 'div', 'section', 'article', 'span','dt','.klaro-play','.f3-widget-paginator>li','.filtercategorie']
+            }
+        ],
+        tabindexClick: [
+            { selector: '.swiper-pagination-bullet', action: 'isclick' },
+            { selector: 'input[type="submit"]', action: 'isclick' },
+            { selector: 'div.special', action: 'isclick' },
+            { selector: '.klaro-moreinfo', action: 'isclick' },
+            { selector: '.cm-switch .slider', action: 'isclick' },
+            { selector: '.klaro-play', action: 'isclick' },
+            { selector: '*:not(footer) .scrollnav ul[id*="bfNavSub"]>div', action: 'isclick' },
+            { selector: '.searchIcon', action: 'isclick' },
+            { selector: '.f3-widget-paginator>li', action: 'isclick' },
+            { selector: 'div[class="btn-cookie"]', action: 'isclick' },
+            { selector: '.filtercategorie', action: 'isclick' },
+            { selector: '.casub', action: 'isclick' },
+            { selector: '.allFilter', action: 'isclick' },
+            { selector: '.f-close', action: 'isclick' },
+            { selector: '.historyBack', action: 'isclick' },
+        ],
+        clickFocus: [
+            { selector: '.klaro-placeholder', action: '#klaro' },
+            { selector: '.openCookie>span', action: '#klaro' },
+        ],
+        structureLink: [
+            {
+                selector: ["#breadcrumb", "#no-links", ".paginator", ".fb"],
+                groupSelectors: ["nav", "main", "#footer"]
+            }
+        ],
+        contentTab: [
+            {
+                selector: ["header", "main", "article", "section", "footer", "nav"],
+                exclusions: ["#bfToggle", "#bfPannel", "#bfStructure", "figure", "button", "#aj", "#menuToggle", "#klaro", "input", "textarea", "select", "svg", "img", "h1", "h2", "h3", "h4", "h5", "div"]
+            }
+        ],
+    },
+    pauseAnimationsConfig: [
+        {
+            code: function() {
+                document.querySelectorAll('video').forEach(video => {
+                video.pause();
+                });
+            }
+        }
+    ],
+    customCss: [
+      {
+        code: `
+          html {
+          opacity:1;
+          }
+          html #bfTabContent #bfTab2Content ul{
+          border: none!important;
+          }
+          html[class*="bfSize"] header nav{
+          max-width: 50%;
+          }
+          html[class*="bfSize"].scrollnav header nav{
+          background: #fff;
+          }
+          html[class*="bfSize"].scrollnav header nav span{
+          color: #000;
+          }
+          html.blurNav[class*="bfSize"] nav>ul>li a{
+          background:#fff;
+          }
+          html.bfSize-1 .searchSmall input{
+          font-size:calc(100% + 3px);
+          }
+          html.bfSize-2 .searchSmall input{
+          font-size:calc(100% + 6px);
+          }
+          html.bfSize-3 .searchSmall input{
+          font-size:calc(100% + 9px);
+          }
+          html[class*="bfSize"] .searchSmall input::placeholder{
+          font-size:100%;
+          }
+          html[class*="bfFont"] .searchSmall input::placeholder{
+          color:currentcolor;
+          }
+          html[class*="bfLSpacing"] .news-list-view .article .description{
+          padding-bottom: 40px;
+          }
+          html .scrollnav ul[id*="bfNavSub"]>div{
+          position:absolute!important;
+          }
+          html .scrollnav .sub>a:first-child{
+          outline-offset:0px!important;
+          }
+          .f3-widget-paginator>li{
+          position:relative;
+          }
+          .f3-widget-paginator>li>a{
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          opacity: 0;
+          }
+          html.bfSize-1 body .btn-more{
+          font-size:21px
+          }
+          html.bfSize-2 body .btn-more{
+          font-size:24px
+          }
+          html.bfSize-3 body .btn-more{
+          font-size:27px
+          }
+          #footer nav {
+          width: calc(100% - 276px);
+          }
+          html.bfCDark #logo a img{
+          filter: brightness(0) invert(1)!important;
+          background-color: transparent !important;
+          }
+          html.bfCLight #logo a img{
+          filter: none!important;
+          }
+          html[class*="bfBgColor"] #logo a img{
+            background-color: transparent !important;
+          }
+          html.bfBgColorWhite #logo a img{
+          filter: none!important;
+          }
+          html.bfBgColorBlack #logo a img{
+          filter: brightness(0) invert(1)!important;
+          }
+          html[class*="bfFont"] .ancon>div>div.anc>div>span.adp:after{
+          color:currentcolor;
+          }
+          html[class*="bfFont"] .termine li{
+          border-color: currentcolor;
+          }
+          html .bfHLink.hm-logo{
+          position: absolute!important;
+          }
+          html .bfOpenNav{
+          background-color: #fff;
+          }
+          html .news-event .teaser-text .teaser-text-con:has(+ a:focus),html .news-event .teaser-text .teaser-text-con:has(a:focus){
+          position: absolute;
+          width: 100%;
+          background: #fff;
+          bottom: 0;
+          margin: 0 auto 40px;
+          min-height: calc(100% - 40px);
+          transition: all 0.4s ease-in-out 0s;
+          -webkit-transition: all 0.4s ease-in-out 0s;
+          -moz-transition: all 0.4s ease-in-out 0s;
+          -o-transition: all 0.4s ease-in-out 0s;
+          }
+          .news-event .teaser-text .btn-more:focus, .news-event .hoverimgtext .teaser-text .btn-more:focus,html .news-event .teaser-text .teaser-text-con:has(a:focus) + .btn-more{
+          opacity: 1;
+          bottom: 20px;
+          transition: all 0.4s ease-in-out 0s;
+          -webkit-transition: all 0.4s ease-in-out 0s;
+          -moz-transition: all 0.4s ease-in-out 0s;
+          -o-transition: all 0.4s ease-in-out 0s;
+          }
+          html:is([class*="bfSize"], [class*="bfLSpacing"], [class*="bfSpacing"]) .subsub>ul li:hover>a>div,html .subsub>ul li>a:focus>div,html:is([class*="bfSize"], [class*="bfLSpacing"], [class*="bfSpacing"]) .subthree>ul li:hover>a>div,html .subthree>ul li>a:focus>div{
+          background: #00B5DD;
+          height:auto;
+          z-index:999;
+          position:relative;
+          }
+          html .subsub>ul li>a:focus>div>div{
+          display: table;
+          height: auto;
+          width: 100%;
+          opacity:1;
+          }
+          html .subthree>ul li>a:focus>div>div{
+          display: table;
+          height: auto;
+          width: 100%;
+          opacity:1;
+          }
+          html:is([class*="bfSize"], [class*="bfLSpacing"], [class*="bfSpacing"]) .subsub>ul li:hover,html .subsub>ul li:has(a:focus){
+          overflow:visible;
+          }
+          input.bfFocus[type="checkbox"]:not(:checked):focus+label:before{
+          background:none;
+          outline: #F00 solid 4px !important;
+          outline-offset: 4px !important;
+          }
+          input.bfFocus[type="checkbox"]:checked:focus+label:before{
+          background:#00B5DD;
+          outline: #F00 solid 4px !important;
+          outline-offset: 4px !important;
+          }
+          html:is([class*="bfC"],[class*="bfBg"]) input[type="checkbox"]:checked+label:before{
+          background:#000!important;
+          }
+          .f-close.bfHLink{
+          position:absolute;
+          }
+          html:is([class*="bfSize"], [class*="bfLSpacing"], [class*="bfSpacing"]) .contentslider>.slidercontent figcaption,html:is([class*="bfSize"], [class*="bfLSpacing"], [class*="bfSpacing"]) .contentslider>.slidercontent figcaption *{
+          position:relative;
+          }
+          .news-img-wrap .bfHLink{
+          position:initial;
+          }
+        `
+      }
+    ]
+};
+setTimeout(
+    function(){
+        if(document.getElementsByTagName('html')[0].getAttribute('lang') == 'en-EN' || document.getElementsByTagName('html')[0].getAttribute('lang') == 'en'){
+            fontsettings = document.getElementById('bfschrifteinstellungen');
+            fontsettings.innerText = 'Font settings'
+            colorsettings = document.getElementById('bffarbeinstellungen');
+            colorsettings.innerText = 'Color settings'
+            contentsettings = document.getElementById('bfinhaltseinstellungen');
+            contentsettings.innerText = 'Content settings'
+            infobtn = document.getElementById('bfinfoBtn');
+            infobtn.addEventListener('click', translateKeysButton);
+            structurebtn = document.querySelector('.bfConfig button[data-bfc="bfSiteStructure"]');
+            structurebtn.addEventListener('click', translateStructureButton);
+        }
+        anker = document.querySelector('.bfConfig button[data-bfc="bfSiteStructure"]');
+        anker.addEventListener('click', ankerlink);
+        const buttons = document.querySelectorAll(
+            '.bfschrifteinstellungen button[data-bfc="bfLargerText"],' +
+            '.bfschrifteinstellungen button[data-bfc="bfCharacterSpacing"],' +
+            '.bfschrifteinstellungen button[data-bfc="bfLineSpacing"]'
+        );
+        buttons.forEach(btn => {
+            btn.addEventListener('click', masonryUpdate);
+        });
+        masonryUpdate();
+        const paginationbtn = document.querySelectorAll('.f3-widget-paginator > li');
+        paginationbtn.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const link = btn.querySelector('a');
+                if (link) {
+                    link.click();
+                }
+            });
+        });
+    }
+, 0);
+
+function translateKeysButton(){
+  setTimeout(() => {
+    const infoBoxKeys = document.querySelector('#bfInfoBoxKeys p:last-child strong');
+    infoBoxKeys.textContent = 'If multiple identical elements are present on the same page, you can switch between them using this keyboard shortcut.';
+  }, 0);
+}
+function translateStructureButton(){
+  setTimeout(() => {
+    const bfTab1 = document.getElementById('bfTab1');
+    bfTab1.textContent = 'Headlines';
+    const bfTab3 = document.getElementById('bfTab3');
+    bfTab3.textContent = 'Contents';
+  }, 0);
+}
+function ankerlink(){
+    setTimeout(() => {
+        const container = document.getElementById('bfStructure');
+        if (container) {
+            container.addEventListener('click', e => {
+                const a = e.target.closest('a[href^="#"]');
+                if (!a || !container.contains(a)) return;
+                e.preventDefault();
+                const id = a.getAttribute('href').slice(1);
+                const target = document.getElementById(id);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    history.replaceState(null, '', '#'+id);
+                }
+            });
+        }
+  }, 0);
+}

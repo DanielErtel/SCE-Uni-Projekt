@@ -1,0 +1,9 @@
+if(jQuery(".popcastplayer").length){
+    
+    jQuery(".popcastplayer").each(function(){
+        popcastSrc=jQuery(this).attr("data-popcast");
+
+        popcastJs='<script class="podigee-podcast-player" src="https://player.podigee-cdn.net/podcast-player/javascripts/podigee-podcast-player.js" data-configuration="'+popcastSrc+'/embed?context=external"></script>';
+        jQuery(popcastJs).appendTo(this);
+    });
+}

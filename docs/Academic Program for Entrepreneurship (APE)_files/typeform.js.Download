@@ -1,0 +1,44 @@
+
+jQuery('.o-mail .klaro-inner').remove();
+
+
+
+
+    if(jQuery('.typefomframe').length){
+        jQuery('.typefomframe').each(function(){
+
+contentTypeform='<div data-tf-widget="'+jQuery(this).attr('data-typeform')+'" data-tf-iframe-props="title=Mail" data-tf-medium="snippet"></div>';
+            
+            if(!jQuery(this).hasClass('mailready')){
+                
+                jQuery(contentTypeform).appendTo(jQuery(this));
+                
+//                jQuery(this).attr('src',jQuery(this).attr('data-typeform'));
+                jQuery(this).addClass('mailready');
+                
+                
+                
+            }
+        });
+    }
+
+
+
+var typeformJSe = document.createElement('script');
+                        typeformJSe.type = 'text/javascript';
+                        typeformJSe.src = '//embed.typeform.com/next/embed.js';
+                        typeformJSe.id = 'typeformjscore';
+                        document.getElementsByTagName('head')[0].appendChild(typeformJSe);
+
+
+jQuery(document).ajaxComplete(function(e) {
+//    if(jQuery('.typefomMail').length){
+//        jQuery('.typefomframe').each(function(){
+//            if(!jQuery(this).hasClass('mailready')){
+//                jQuery(this).attr('src',jQuery(this).attr('data-typeform'));
+//                jQuery(this).addClass('mailready');
+//            }
+//        });
+//    }
+});
+

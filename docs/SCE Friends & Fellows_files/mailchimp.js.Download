@@ -1,0 +1,15 @@
+if(jQuery('.mailchimpIframe').length){
+    jQuery('.mailchimpIframe').each(function(){
+            jQuery(this).attr('src',jQuery(this).attr('data-src'));
+            jQuery(this).parent().addClass('mailchimpready');
+
+
+    });
+}
+
+
+
+
+
+
+

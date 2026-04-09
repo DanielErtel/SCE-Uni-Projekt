@@ -1,0 +1,21 @@
+html.domain--www-youtube-com body.video main h1 {
+	padding-left: 2rem;
+}
+
+html.domain--www-youtube-com body.video main p {
+  	padding-left: 2rem;
+  	padding-right: 2rem;
+}
+
+html.domain--www-youtube-com body.video main a {
+  color: #ffffff
+}
+
+html.domain--kuula-co body {
+	margin: 2rem;
+}
+
+html.domain--plugins-flockler-com body {
+  	padding-left: 2rem;
+  	padding-right: 2rem;
+}
